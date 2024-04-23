@@ -28,6 +28,8 @@ class User extends Authenticatable implements HasMedia
         'password',
         'email_verified_at',
         'role',
+        'phone_number',
+        'whatsapp_number',
     ];
 
     /**

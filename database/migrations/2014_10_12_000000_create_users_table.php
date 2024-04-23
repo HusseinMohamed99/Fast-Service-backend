@@ -16,8 +16,8 @@ return new class extends Migration
             $table->char('uuid', 36)->nullable();
             $table->string('name');
             $table->string('email')->unique();
-            //$table->date('date_birth')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('whatsapp_number')->nullable();
             $table->string('password')->nullable();
             $table->enum('role', ['Worker', 'Customer','Admin'])->default('Worker'); //
             $table->rememberToken();

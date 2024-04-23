@@ -23,6 +23,8 @@ class RegisterController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'role' => $validatedData['role'],
+            'phone_number' => $validatedData['phone_number'],
+            'whatsapp_number' => isset($validatedData['whatsapp_number']) ? $validatedData['whatsapp_number'] : null,
             'password' => Hash::make($validatedData['password']),
             'password_confirme' => Hash::make($validatedData['password_confirme']),
         ]);

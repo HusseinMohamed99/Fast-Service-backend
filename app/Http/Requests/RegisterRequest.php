@@ -46,7 +46,8 @@ class RegisterRequest extends Request
 
             'role' => ['required'],
 
-
+            'phone_number' => ['required','string'],
+            'whatsapp_number' => ['nullable','string'],
 
             'image'=>['sometimes','image','mimes:jpg,jpeg,png,webp,gif']
         ];

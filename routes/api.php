@@ -13,6 +13,8 @@ use  App\Http\Controllers\core\authantication\DeleteAccountController;
 use  App\Http\Controllers\core\authantication\ResendOTPCodeController;
 use  App\Http\Controllers\core\authantication\ResetPasswordController;
 use  App\Http\Controllers\core\authantication\ForgetPasswordController;
+use App\Http\Controllers\Customer\Home\HomeController;
+use App\Http\Controllers\Customer\Profile\UpdateProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +32,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-//  API  routes seeker/auth
+//  API  routes user/auth
 Route::group(['prefix' => 'v1/user/auth'], function () {
     Route::post('/register', RegisterController::class);
     Route::post('/login', LoginController::class);
-
-
     Route::post('/forget_password', ForgetPasswordController::class);
     Route::post('/resend_otp', ResendOTPCodeController::class);
     Route::post('/reset_password', ResetPasswordController::class);
@@ -45,15 +45,24 @@ Route::group(['prefix' => 'v1/user/auth'], function () {
     // API routes for middleware seeker token authentication
     Route::group(['middleware' => 'auth:sanctum'], function () {
 
-        Route::post('/verify_email', VerifyEmailController::class);
+         Route::post('/verify_email', VerifyEmailController::class);
         Route::post('/change_password', ChangePasswordController::class);
-
-
         Route::post('/delete_account', DeleteAccountController::class);
         Route::post('/logout', LogoutController::class);
-
-
 
     });
 });
 
+//  API  routes customer/auth
+Route::group(['prefix' => 'v1/customer'], function () {
+
+    Route::get('/home', HomeController::class);
+    //Route::get('/search', HomeController::class);
+
+    // API routes for middleware seeker token authentication
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('/update_profile', UpdateProfileController::class);
+
+
+    });
+});

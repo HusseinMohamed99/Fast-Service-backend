@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('whatsapp_number')->nullable();
             $table->string('password')->nullable();
             $table->enum('role', ['Worker', 'Customer','Admin'])->default('Worker'); //
+            $table->string('type')->nullable(); 
             $table->rememberToken();
             $table->timestamps();
         });

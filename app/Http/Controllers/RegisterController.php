@@ -17,12 +17,25 @@ class RegisterController extends Controller
 
         $validatedData = $request->validated();
 
-        //$validatedData['date_birth'] = \Carbon\Carbon::createFromFormat('d/m/Y', $validatedData['date_birth']);
-
+        if ($validatedData['role'] === 'Worker') {
+            // إذا كان دور المستخدم "Worker" يجب التحقق من وجود نوع المستخدم
+            if (!isset($validatedData['type'])) {
+                // إذا لم يتم تقديم نوع المستخدم، فقم بإرجاع استجابة الخطأ
+                return $this->handleResponse(message: 'Type is required for Worker role.', code: 422);
+            }
+        }
+        elseif ($validatedData['role'] !== 'Worker') {
+            // If the user's role is not "Worker", check if the type is provided
+            if (isset($validatedData['type'])) {
+                // If the type is provided, return an error response
+                return $this->handleResponse(message: 'Type is not required.', code: 422);
+            }
+        }
         $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'role' => $validatedData['role'],
+            'type' => $validatedData['type'] ?? null,
             'phone_number' => $validatedData['phone_number'],
             'whatsapp_number' => isset($validatedData['whatsapp_number']) ? $validatedData['whatsapp_number'] : null,
             'password' => Hash::make($validatedData['password']),

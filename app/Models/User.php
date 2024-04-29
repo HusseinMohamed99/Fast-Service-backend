@@ -28,6 +28,7 @@ class User extends Authenticatable implements HasMedia
         'password',
         'email_verified_at',
         'role',
+        'type',
         'phone_number',
         'whatsapp_number',
     ];
@@ -57,9 +58,26 @@ class User extends Authenticatable implements HasMedia
         static::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
+
+        static::deleting(function ($user) {
+            if ($user->informationWorker && !is_null($user->informationWorker->worker_id)) {
+                $user->informationWorker->delete();
+            }
+        });
     }
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('user_profile_image');
     }
+    public function informationWorker()
+    {
+        return $this->hasOne(InformationWorker::class, 'worker_id');
+    }
+
+    public function savedWorkers()
+    {
+        return $this->belongsToMany(User::class, 'saved_workers', 'user_id', 'worker_id');
+    }
+
+
 }

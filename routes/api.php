@@ -14,7 +14,14 @@ use  App\Http\Controllers\core\authantication\ResendOTPCodeController;
 use  App\Http\Controllers\core\authantication\ResetPasswordController;
 use  App\Http\Controllers\core\authantication\ForgetPasswordController;
 use App\Http\Controllers\Customer\Home\HomeController;
+use App\Http\Controllers\Customer\Home\SearchController;
 use App\Http\Controllers\Customer\Profile\UpdateProfileController;
+use App\Http\Controllers\Customer\Search_SaveWorkerController;
+use App\Http\Controllers\Customer\UnSave_SaveWorkerController;
+use App\Http\Controllers\Customer\WorkerDetailsController;
+use App\Http\Controllers\Worker\HomeWorkerController;
+use App\Http\Controllers\Worker\InformationWorkerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,12 +64,30 @@ Route::group(['prefix' => 'v1/user/auth'], function () {
 Route::group(['prefix' => 'v1/customer'], function () {
 
     Route::get('/home', HomeController::class);
-    //Route::get('/search', HomeController::class);
+    Route::get('/search', SearchController::class);
+    Route::get('/worker_details', WorkerDetailsController::class);
+    Route::get('/search_saved', Search_SaveWorkerController::class);
 
     // API routes for middleware seeker token authentication
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/update_profile', UpdateProfileController::class);
+        Route::post('/update_informatiom', InformationWorkerController::class);
+        Route::post('/save_unsaved', UnSave_SaveWorkerController::class);
 
 
     });
+
+});
+
+Route::group(['prefix' => 'v1/worker'], function () {
+
+
+    // API routes for middleware seeker token authentication
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('/update_informatiom', InformationWorkerController::class);
+        Route::Get('/home', HomeWorkerController::class);
+
+
+    });
+
 });

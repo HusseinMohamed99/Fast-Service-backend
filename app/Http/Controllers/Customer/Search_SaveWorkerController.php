@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Customer\Home;
+namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class SearchController extends Controller
+class Search_SaveWorkerController extends Controller
 {
     public function __invoke(Request $request)
     {
@@ -25,7 +25,7 @@ class SearchController extends Controller
                 }
 
                 // Search for users with the specified type
-                $users = User::where('type', 'LIKE', '%' . $searchText . '%')->with('informationWorker')->get();
+                $users = User::where('name', 'LIKE', '%' . $searchText . '%')->with('informationWorker')->get();
 
 
                 return response()->json($users);

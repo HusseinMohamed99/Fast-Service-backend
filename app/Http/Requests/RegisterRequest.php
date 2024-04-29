@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class RegisterRequest extends Request
 {
@@ -24,7 +26,7 @@ class RegisterRequest extends Request
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'name'=>['required','string','min:3','max:25'],
             'email'=>['required','string','email','max:255','unique:' . User::class,
             function ($attribute, $value, $fail) {
@@ -44,12 +46,25 @@ class RegisterRequest extends Request
 
             'password_confirme' => ['required', 'same:password'],
 
-            'role' => ['required'],
+            'role' => ['required', 'in:Worker,Customer,Admin'],
+            //'type' => ['nullable',],
+            'type' => ['nullable', Rule::exists('categories', 'name')],
 
             'phone_number' => ['required','string'],
             'whatsapp_number' => ['nullable','string'],
 
             'image'=>['sometimes','image','mimes:jpg,jpeg,png,webp,gif']
         ];
+
+
+
+        return $rules;
     }
+    public function messages()
+{
+    return [
+        'role.in' => 'The role must be one of the following: Worker, Customer.',
+    ];
+
+}
 }

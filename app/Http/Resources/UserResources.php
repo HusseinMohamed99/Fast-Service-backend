@@ -21,6 +21,8 @@ class UserResources extends JsonResource
 
             'image'=>$this->getFirstMediaUrl('user_profile_image')?:$defaultImage,
             "role" => $this->whenHas('role'),
+            "type" => $this->whenHas('type'),
+
         ];
     }
 }

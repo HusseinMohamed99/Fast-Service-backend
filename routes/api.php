@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\All_UserController;
+use App\Http\Controllers\Admin\Delete_UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -15,6 +17,7 @@ use  App\Http\Controllers\core\authantication\ResetPasswordController;
 use  App\Http\Controllers\core\authantication\ForgetPasswordController;
 use App\Http\Controllers\Customer\Home\HomeController;
 use App\Http\Controllers\Customer\Home\SearchController;
+use App\Http\Controllers\Customer\Profile\GetProfileController;
 use App\Http\Controllers\Customer\Profile\UpdateProfileController;
 use App\Http\Controllers\Customer\Saved\SavedPageController;
 use App\Http\Controllers\Customer\Saved\Search_SaveWorkerController;
@@ -57,6 +60,7 @@ Route::group(['prefix' => 'v1/user/auth'], function () {
         Route::post('/change_password', ChangePasswordController::class);
         Route::post('/delete_account', DeleteAccountController::class);
         Route::post('/logout', LogoutController::class);
+        Route::Get('/get_profile', GetProfileController::class);
 
     });
 });
@@ -89,6 +93,19 @@ Route::group(['prefix' => 'v1/worker'], function () {
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/update_informatiom', InformationWorkerController::class);
         Route::Get('/home', HomeWorkerController::class);
+
+
+    });
+
+});
+
+
+Route::group(['prefix' => 'v1/admin'], function () {
+
+    // API routes for middleware seeker token authentication
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::get('/all_user', All_UserController::class);
+        Route::post('/delete_user', Delete_UserController::class);
 
 
     });

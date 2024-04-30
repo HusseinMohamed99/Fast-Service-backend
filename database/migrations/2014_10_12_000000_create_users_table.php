@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -21,10 +22,83 @@ return new class extends Migration
             $table->string('whatsapp_number')->nullable();
             $table->string('password')->nullable();
             $table->enum('role', ['Worker', 'Customer','Admin'])->default('Worker'); //
-            $table->string('type')->nullable(); 
+            $table->string('type')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
+        
+    DB::table('users')->insert([
+        [
+            'name' => 'User 1',
+            'email' => 'Sandyshref9@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Worker',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+        [
+            'name' => 'User 2',
+            'email' => 'rofida.khaled789@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+        [
+            'name' => 'User 3',
+            'email' => 'sarhanahmed242@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],        [
+            'name' => 'User 4',
+            'email' => 'oaturky@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],        [
+            'name' => 'User 5',
+            'email' => 'mariemmaher555@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],        [
+            'name' => 'User 6',
+            'email' => 'oa95091@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+        [
+            'name' => 'User 7',
+            'email' => 'basmalaa.nasserr999@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ], [
+            'name' => 'User 8',
+            'email' => 'alsadathmdan5@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+
+        [
+            'name' => 'User 9',
+            'email' => 'hm15520222@gmail.com',
+            'password' => bcrypt('Admin123@'),
+            'role' => 'Admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ],
+    ]);
+
     }
 
     /**

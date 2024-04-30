@@ -29,16 +29,20 @@ class InitCategoryCommand extends Command
     public function handle()
     {
 
-
         Category::create([
             'name' => 'Cleaning',
         ]);
         Category::create([
-            'name' => 'Repairing',
+            'name' => 'Plumber',
         ]);
         Category::create([
 
             'name' => 'Electricion',
+
+        ]);
+        Category::create([
+
+            'name' => 'Carpenter',
 
         ]);
         $this->info('Update DataBase successfully.');

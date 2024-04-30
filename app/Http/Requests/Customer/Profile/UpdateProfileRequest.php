@@ -26,8 +26,6 @@ class UpdateProfileRequest extends FormRequest
             'phone_number' => ['sometimes', 'string', 'min:3', 'max:25'],
             'whatsapp_number' => ['sometimes','string'],
             'image' => ['sometimes', 'image', 'mimes:jpg,jpeg,png,webp,gif'],
-
-
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\Customer\Saved;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;

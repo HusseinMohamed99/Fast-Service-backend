@@ -27,7 +27,7 @@ class SavedWorker extends Model
         }
 
         // Define the relationship with the Worker model
-        public function worker()
+        public function users()
         {
             return $this->belongsTo(User::class);
         }

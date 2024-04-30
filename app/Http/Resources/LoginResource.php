@@ -18,6 +18,8 @@ class LoginResource extends JsonResource
             "uuid" => $this->whenHas('uuid'),
             "email" => (string) $this->whenHas('email'),
             "name" =>(string) $this->whenHas('name'),
+            "role" =>(string) $this->whenHas('role'),
+
             'email_verified'=>(bool) $this->email_verified_at ? true:false,
             'token' => $this->createToken('auth_token')->plainTextToken,
             //"date_birth" => $dateOfBirth,

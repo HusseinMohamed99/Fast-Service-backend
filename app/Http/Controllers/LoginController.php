@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\LoginResource;
 use Illuminate\Support\Facades\RateLimiter;
-use App\Traits\ResponseTrait; // استيراد Trait
+use App\Traits\ResponseTrait;
 
 
 
@@ -38,6 +38,10 @@ class LoginController extends Controller
 
             RateLimiter::hit('send-message:'.auth()->user());
 
+        //
+        if ($user->role === 'Admin') {
+            return $this->handleResponse(status:true, message:'Welcome Admin '. $user->name , data: new LoginResource($user));
+        }
 
 
             if (!auth()->user()->email_verified_at) {

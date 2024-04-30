@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers\Customer\Saved;
 
 use App\Http\Controllers\Controller;
 use App\Models\SavedWorker;
@@ -18,10 +18,14 @@ class UnSave_SaveWorkerController extends Controller
 
         // Check if worker ID is provided
         $workerId = $request->input('id');
-        if (!$workerId) {
+      if (!$workerId) {
             return $this->handleResponse(message: 'Worker ID is required', code: 400, status: false);
         }
 
+        // Check if the worker exists
+        if ($user->role =='Worker') {
+            return $this->handleResponse(message: 'Should Be Role Customer', code: 400, status: false);
+        }
         // Check if the worker exists
         $workerExists = User::where('id', $workerId)->exists();
         if (!$workerExists) {

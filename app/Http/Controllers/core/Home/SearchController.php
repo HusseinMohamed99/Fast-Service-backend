@@ -28,8 +28,23 @@ class SearchController extends Controller
                 $users = User::where('type', 'LIKE', '%' . $searchText . '%')->with('informationWorker')->get();
 
 
-                return response()->json($users);
+        // Map users to include image URLs
+        $formattedUsers = $users->map(function ($user) {
+            // Get the URL of the user's profile image from the 'profile_image' column
+            $defaultImage = asset('Default/profile.jpeg');
+            $profileImageUrl = $user->profile_image ? asset('path/to/images/' . $user->profile_image) : $defaultImage;
 
+            // Return user data with image URL
+            return [
+                'id' => $user->id,
+                'name' => $user->name,
+                'type' => $user->type,
+                'profile_image_url' => $profileImageUrl,
+                'informationWorker' => $user->informationWorker,
+            ];
+        });
+
+        return response()->json($formattedUsers);
     }
-
 }
+

@@ -7,20 +7,19 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class All_UserController extends Controller
+class All_CustomerController extends Controller
 {
-
     public function __invoke()
     {
         $user = Auth::user();
 
         if ($user->role == 'Admin') {
-            $users = User::whereIn('role', ['Customer', 'Worker'])->get();
+            $users = User::whereIn('role', ['Customer'])->get();
 
             return response()->json([
                 'success' => true,
                 'data' => $users,
-                'message' => 'All users retrieved successfully.'
+                'message' => 'All users Customer retrieved successfully.'
             ]);
         }
         elseif ($user->role !== 'Admin') {

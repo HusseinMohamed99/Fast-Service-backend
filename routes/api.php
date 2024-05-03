@@ -75,7 +75,6 @@ Route::group(['prefix' => 'v1/customer'], function () {
 
     Route::get('/search', HomeSearchController::class);
     Route::get('/worker_details', WorkerDetailsController::class);
-    Route::get('/search_saved', Search_SaveWorkerController::class);
 
 
     // API routes for middleware seeker token authentication
@@ -85,6 +84,7 @@ Route::group(['prefix' => 'v1/customer'], function () {
         Route::get('/saved_page', SavedPageController::class);
         Route::post('/save_unsaved', UnSave_SaveWorkerController::class);
 
+        Route::get('/search_saved', Search_SaveWorkerController::class);
 
     });
 

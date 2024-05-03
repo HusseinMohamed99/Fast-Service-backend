@@ -13,7 +13,7 @@ class UnSave_SaveWorkerController extends Controller
     public function __invoke(Request $request)
     {
         // Get the authenticated user
-        $user = $request->user();
+        $user = Auth::user();
         $same_user = Auth::id();
 
         // Check if worker ID is provided

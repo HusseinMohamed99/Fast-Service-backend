@@ -15,6 +15,7 @@ class SavedWorkerResources extends JsonResource
             'saved_id' => $this->id,
             'user_id'=>$this-> user_id,
             'worker_id' => $this->worker_id,
+            'worker_name' => $this->userTo->name,
             'role' => $this->userTo->type,
             'price_from' => $this->userTo->informationWorker->price_from,
             'price_to' => $this->userTo->informationWorker->price_to,

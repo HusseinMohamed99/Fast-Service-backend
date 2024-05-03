@@ -44,7 +44,9 @@ class SearchController extends Controller
             ];
         });
 
-        return response()->json($formattedUsers);
+        return $this->handleResponse(data: [
+            'List_search' => $formattedUsers,
+        ]);
     }
 }
 

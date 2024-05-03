@@ -27,7 +27,7 @@ class UnSave_SaveWorkerController extends Controller
             return $this->handleResponse(message: 'Should Be Role Customer', code: 400, status: false);
         }
         // Check if the worker exists
-        $workerExists = User::where('id', $workerId)->exists();
+        $workerExists = User::where('id', $workerId)->where('role','=','Worker')->exists();
         if (!$workerExists) {
             return $this->handleResponse(message: 'Worker Not found', code: 404, status: false);
         }

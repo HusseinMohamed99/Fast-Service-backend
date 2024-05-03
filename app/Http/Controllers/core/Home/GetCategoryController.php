@@ -10,7 +10,7 @@ class GetCategoryController extends Controller
 {
     public function __invoke()
     {
-        $Categories = Category::pluck('name', 'id');
+        $Categories = Category::all('name', 'id');
         return $this->handleResponse(data: [
             'Category' => $Categories,
 

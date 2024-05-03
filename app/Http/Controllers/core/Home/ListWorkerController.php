@@ -29,6 +29,7 @@ class ListWorkerController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
+                    'type' =>$user->type,
                     'image' => $profileImageUrl,
                     'informationWorker' => $user->informationWorker,
                 ];

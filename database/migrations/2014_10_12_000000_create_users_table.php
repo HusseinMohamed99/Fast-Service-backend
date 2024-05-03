@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -26,12 +27,14 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+        $now = now(); // تاريخ ووقت الآن
 
     DB::table('users')->insert([
         [
             'name' => 'User 1',
             'email' => 'Sandyshref9@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -40,6 +43,7 @@ return new class extends Migration
             'name' => 'User 2',
             'email' => 'rofida.khaled789@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -48,6 +52,7 @@ return new class extends Migration
             'name' => 'User 3',
             'email' => 'sarhanahmed242@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -55,6 +60,7 @@ return new class extends Migration
             'name' => 'User 4',
             'email' => 'oaturky@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -62,6 +68,7 @@ return new class extends Migration
             'name' => 'User 5',
             'email' => 'mariemmaher555@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -69,6 +76,7 @@ return new class extends Migration
             'name' => 'User 6',
             'email' => 'oa95091@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -77,6 +85,7 @@ return new class extends Migration
             'name' => 'User 7',
             'email' => 'basmalaa.nasserr999@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -84,6 +93,7 @@ return new class extends Migration
             'name' => 'User 8',
             'email' => 'alsadathmdan5@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -93,10 +103,12 @@ return new class extends Migration
             'name' => 'User 9',
             'email' => 'hm15520222@gmail.com',
             'password' => bcrypt('Admin123@'),
+            'email_verified_at' => $now,
             'role' => 'Admin',
             'created_at' => now(),
             'updated_at' => now(),
         ],
+        
     ]);
 
     }

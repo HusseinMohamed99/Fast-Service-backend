@@ -14,18 +14,39 @@ class All_WorkerController extends Controller
         $user = Auth::user();
 
         if ($user->role == 'Admin') {
-            $users = User::whereIn('role', ['Worker'])->get();
+            $admin_id = Auth::id();
 
-            return response()->json([
-                'success' => true,
-                'data' => $users,
-                'message' => 'All users Customer retrieved successfully.'
-            ]);
-        }
-        elseif ($user->role !== 'Admin') {
+            // Retrieve workers with their informationWorker and profile image URL
+            $workers = User::where('role', 'worker')
+                ->where('id', '!=', $admin_id)
+                ->with('informationWorker')
+                ->get()
+                ->map(function ($worker) use ($admin_id) {
+                    // Get the URL of the worker's profile image from the 'user_profile_image' collection
+                    $defaultImage = asset('Default/profile.jpeg');
+                    $profileImage = $worker->getFirstMedia('user_profile_image');
+                    $profileImageUrl = $profileImage ? $profileImage->getUrl() : $defaultImage;
+
+
+                    // Return worker data with image URL and saved flag
+                    return [
+                        'id' => $worker->id,
+                        'name' => $worker->name,
+                        'email' => $worker->email,
+                        'type' => $worker->type,
+                        'image' => $profileImageUrl,
+                        'informationWorker' => $worker->informationWorker,
+                    ];
+                });
+
+                return $this->handleResponse(
+                    data : $workers,
+
+            );
+        } else {
             return $this->handleResponse(
                 status : false,
-                message: 'Unauthorized',
+                message : 'Unauthorized',
                 code: 422
             );
         }

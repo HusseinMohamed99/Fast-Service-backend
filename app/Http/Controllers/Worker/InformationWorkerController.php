@@ -17,8 +17,6 @@ class InformationWorkerController extends Controller
     $validatedData = $request->validated();
     $user_id = Auth::id();
 
-    $working_hours_from = isset($validatedData['working_hours_from']) ? Carbon::createFromFormat('h:i A', $validatedData['working_hours_from'])->format('H:i:s') : null;
-    $working_hours_to = isset($validatedData['working_hours_to']) ? Carbon::createFromFormat('h:i A', $validatedData['working_hours_to'])->format('H:i:s') : null;
 
     $user = InformationWorker::where('worker_id', $user_id)->first();
 
@@ -32,8 +30,9 @@ class InformationWorkerController extends Controller
         $user->details = $validatedData['details'] ?? $user->details;
         $user->price_from = $validatedData['price_from'] ?? $user->price_from;
         $user->price_to = $validatedData['price_to'] ?? $user->price_to;
-        $user->working_hours_from = $working_hours_from ?? $user->working_hours_from;
-        $user->working_hours_to = $working_hours_to ?? $user->working_hours_to;
+        $user->working_hours_from = isset($validatedData['working_hours_from']) ? Carbon::parse($validatedData['working_hours_from']) : $user->working_hours_from;
+        // Assign working hours to validated data if available, otherwise use existing value
+        $user->working_hours_to = isset($validatedData['working_hours_to']) ? Carbon::parse($validatedData['working_hours_to']) : $user->working_hours_to;
 
         $user->save();
 

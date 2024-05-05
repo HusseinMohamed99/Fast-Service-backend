@@ -9,11 +9,12 @@ class InformationWorkerResource extends JsonResource
 {
     public function toArray($request): array
     {
-        $startTime = Carbon::parse($this->working_hours_from);
-        $endTime = Carbon::parse($this->working_hours_to);
 
-        $formattedStartTime = $startTime->format('h:i A');
-        $formattedEndTimeTime = $endTime->format('h:i A');
+
+
+        $formattedStartTime = $this->working_hours_from ? $this->working_hours_from->format('h:i A') : null;
+        $formattedEndTimeTime = $this->working_hours_to ? $this->working_hours_to->format('h:i A') : null;
+
 
         $data= [
             'worker_id'=> $this->whenHas('worker_id'),

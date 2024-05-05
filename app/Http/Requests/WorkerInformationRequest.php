@@ -26,8 +26,8 @@ class WorkerInformationRequest extends Request
             'details' => ['nullable', 'exclude_if:address,present,price_from,present,price_to,present,working_hours_from,present,working_hours_to,present'],
             'price_from' => ['nullable', 'exclude_if:address,present,details,present,price_to,present,working_hours_from,present,working_hours_to,present','required_with:price_to'],
             'price_to' => ['nullable', 'exclude_if:address,present,details,present,price_from,present,working_hours_from,present,working_hours_to,present','required_with:price_from'],
-            'working_hours_from' => ['nullable', 'date_format:h:i A' , 'before:working_hours_to', 'required_with:working_hours_to'],
-            'working_hours_to' => ['nullable', 'date_format:h:i A', 'after:working_hours_from', 'required_with:working_hours_from'],
+            'working_hours_from' => ['nullable' , 'before:working_hours_to', 'required_with:working_hours_to'],
+            'working_hours_to' => ['nullable' , 'after:working_hours_from', 'required_with:working_hours_from'],
 
         ];
     }

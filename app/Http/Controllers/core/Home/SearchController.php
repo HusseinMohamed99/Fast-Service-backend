@@ -17,23 +17,16 @@ class SearchController extends Controller
         }
 
 
-
-                // Check if the search text is empty
-                $searchText = $request->input('search');
-                if (empty($searchText)) {
-                    return $this->handleResponse(message: 'Please Enter Text');
-                }
-
                 // Search for users with the specified type
-                $users = User::where('type', 'LIKE', '%' . $searchText . '%')->with('informationWorker')->get();
+        $users = User::where('type', 'LIKE', '%' . $searchText . '%')->with('informationWorker')->get();
 
 
         // Map users to include image URLs
         $formattedUsers = $users->map(function ($user) {
             // Get the URL of the user's profile image from the 'profile_image' column
             $defaultImage = asset('Default/profile.jpeg');
-            $profileImageUrl = $user->profile_image ? asset('path/to/images/' . $user->profile_image) : $defaultImage;
-
+            $profileImage = $user->getFirstMedia('user_profile_image');
+            $profileImageUrl = $profileImage ? $profileImage->getUrl() : $defaultImage;
             // Return user data with image URL
             return [
                 'id' => $user->id,
